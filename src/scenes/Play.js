@@ -8,6 +8,6 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        this.add.sprite(260, 420, 'player');
+        this.add.sprite(240, 420, 'player');
     }
 }
