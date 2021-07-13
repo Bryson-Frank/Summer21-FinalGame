@@ -10,6 +10,8 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('walking', './assets/walker7Frames-01.png', {frameWidth: 110, frameHeight: 187, startFrame: 0, endFrame: 7});
         this.load.image('breathe', './assets/breathe_button.png');
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
+        this.load.audio('inhale', 'assets/inhale.wav');
+        this.load.audio('exhale', 'assets/exhale.wav');
         }
 
     create() {
@@ -41,6 +43,8 @@ class Play extends Phaser.Scene {
         this.anims.create(this.walkingAnim);
         this.walker.body.velocity.x = 0;
         this.innout.anims.play('in-n-out');
+        //inhale/exhale variable
+        this.breatheCount = 0;
     }
 
     update() {
@@ -51,6 +55,9 @@ class Play extends Phaser.Scene {
             this.breathe.body.velocity.x = 0;
             this.innout.body.velocity.x = 0;
         }
+        
+        
+
         // checks if space button was pressed and
         // also if walking is not playing,
         // if so, then it sets velocity of all objects to 500
@@ -61,6 +68,17 @@ class Play extends Phaser.Scene {
             this.breathe.body.velocity.x = 500;
             this.innout.body.velocity.x = 500;
             this.walker.anims.play('walk');
+
+            
+            
+            if ((this.breatheCount % 2) == 0) {
+                this.sound.play('inhale');
+                
+            } else if ((this.breatheCount % 2) == 1) {
+                this.sound.play('exhale');
+                
+            }
+            this.breatheCount += 1;
         }
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
