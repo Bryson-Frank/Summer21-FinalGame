@@ -20,10 +20,11 @@ class Play extends Phaser.Scene {
         this.add.sprite(0, 475, 'ground').setOrigin(0);
 
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
-        // breathe button
-        this.breathe = this.physics.add.sprite((game.config.height/4) - 140, (game.config.width/4) - 280, 'breathe').setOrigin(0, 0);
         // Circle that contricts and expands around the button
-        this.innout = this.physics.add.sprite((700/4) - 185, (1515/4) - 380, 'rhythm').setOrigin(0, 0);
+        this.innout = this.physics.add.sprite((game.config.width/4), (game.config.height/3), 'rhythm');
+        this.innout.circleSize = 1.1;
+        // breathe button
+        this.breathe = this.physics.add.sprite((game.config.width/4), (game.config.height/3), 'breathe');
         // collison box of innout size
         this.innout.setSize(200, 200, (-20, -1.25));
         // button animation config
@@ -42,47 +43,86 @@ class Play extends Phaser.Scene {
         this.anims.create(this.buttonAnimConfig);
         this.anims.create(this.walkingAnim);
         this.walker.body.velocity.x = 0;
-        this.innout.anims.play('in-n-out');
+        //this.innout.anims.play('in-n-out');
         //inhale/exhale variable
         this.breatheCount = 0;
+        // variable to exapnd/shrink ruthm overlay, if true then shrink, if false then expand.
+        this.isDecreasing = true; 
     }
 
     update() {
-        // checks if walking animation is playing if not,
+
+        // update the rhythm circle size by changing its scale.
+        this.setCircleSize(); 
+
+        // checks if walking animation is playing, if not,
         // then it sets x-velocity of all objects to 0
-        if (!(this.walker.anims.isPlaying && this.walker.anims.currentAnim.key === 'walk')) {
+        if (!(this.walker.anims.isPlaying)) {// && this.walker.anims.currentAnim.key === 'walk')) {
             this.walker.body.velocity.x = 0;
-            this.breathe.body.velocity.x = 0;
-            this.innout.body.velocity.x = 0;
+            //this.breathe.body.velocity.x = 0;
+            //this.innout.body.velocity.x = 0;
         }
         
         
-
-        // checks if space button was pressed and
-        // also if walking is not playing,
-        // if so, then it sets velocity of all objects to 500
-        // and plays walking animation
+        /* 
+        checks if space button was pressed and also if walking is not playing,
+        if true, then set velocity of all objects to 500 and plays walking animation.
+        */
         if ((Phaser.Input.Keyboard.JustDown(this.spaceKey)) 
-        && (!(this.walker.anims.isPlaying && this.walker.anims.currentAnim.key === 'walk'))) {
-            this.walker.body.velocity.x = 500;
-            this.breathe.body.velocity.x = 500;
-            this.innout.body.velocity.x = 500;
-            this.walker.anims.play('walk');
+        && (!(this.walker.anims.isPlaying))) { 
+            //&& this.walker.anims.currentAnim.key === 'walk'))) {
+                 // for harsha: no need to check frame since we check if animation is playing anyway
 
-            
-            
-            if ((this.breatheCount % 2) == 0) {
-                this.sound.play('inhale');
-                
-            } else if ((this.breatheCount % 2) == 1) {
-                this.sound.play('exhale');
-                
+            // was spacebar pressed at the correct time?
+            // checks size of the rhythm circle and the breathe button.
+            if (this.innout.displayWidth <= this.breathe.displayWidth) {
+                this.walker.body.velocity.x = 500;
+                // this.breathe.body.velocity.x = 500;
+                //this.innout.body.velocity.x = 500;
+                this.walker.anims.play('walk');
+
+                this.playInhaleExhale(); // play audio.
+
+            } else { // else you lose.
+                this.scene.start('GameOverScene');
             }
-            this.breatheCount += 1;
+            
+
         }
-        // if player reaches end of screen, then transitions to next scene
-        if (this.walker.x > game.config.width) {
+        // if player reaches end of screen, then transitions to next scene (-20 so it walker doesn't go off screen)
+        if (this.walker.x > game.config.width - 20) {
             this.scene.start('GameOverScene');
+        }
+    }
+
+    playInhaleExhale() {
+        if ((this.breatheCount % 2) == 0) {
+            this.sound.play('inhale');
+            
+        } else if ((this.breatheCount % 2) == 1) {
+            this.sound.play('exhale');
+            
+        }
+        this.breatheCount += 1;
+    }
+
+    setCircleSize() {
+
+        this.innout.setScale(this.innout.circleSize); // update the scale.
+        // if we are decreasing,
+        if (this.isDecreasing) {
+            this.innout.circleSize -= .01; // shrink the circle
+
+            if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
+                this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
+            }
+            
+        } else { // if we are not decreasing,
+            this.innout.circleSize += .01; // expand the circle
+
+            if (this.innout.circleSize >= 1.1) { // until it reaches the desired size. 
+                this.isDecreasing = true;        // and we start decreasing again.
+            }
         }
     }
 }
