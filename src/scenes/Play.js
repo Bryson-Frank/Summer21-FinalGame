@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
         }
 
     create() {
+        //camera.setBounds(x, y, width, height)
         this.add.sprite(0, 0, 'background').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         let groundTile = this.add.sprite(0, 475, 'ground').setOrigin(0);
@@ -35,7 +36,8 @@ class Play extends Phaser.Scene {
             this.walker.body.velocity.x = 500;
             this.walker.anims.play('walk');
         }
-
-
+        if (this.walker.x > game.config.width) {
+            this.scene.start('GameOverScene');
+        }
     }
 }
