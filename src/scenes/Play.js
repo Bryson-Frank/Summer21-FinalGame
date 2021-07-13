@@ -40,16 +40,21 @@ class Play extends Phaser.Scene {
         this.anims.create(this.buttonAnimConfig);
         this.anims.create(this.walkingAnim);
         this.walker.body.velocity.x = 0;
-        this.innout.anims.play('in-n-out', true);
+        this.innout.anims.play('in-n-out');
     }
 
     update() {
+        // checks if walking animation is playing if not,
+        // then it sets x-velocity of all objects to 0
         if (!(this.walker.anims.isPlaying && this.walker.anims.currentAnim.key === 'walk')) {
-            //console.log('Player is walking');
             this.walker.body.velocity.x = 0;
             this.breathe.body.velocity.x = 0;
             this.innout.body.velocity.x = 0;
         }
+        // checks if space button was pressed and
+        // also if walking is not playing,
+        // if so, then it sets velocity of all objects to 500
+        // and plays walking animation
         if ((Phaser.Input.Keyboard.JustDown(this.spaceKey)) 
         && (!(this.walker.anims.isPlaying && this.walker.anims.currentAnim.key === 'walk'))) {
             this.walker.body.velocity.x = 500;
@@ -57,6 +62,7 @@ class Play extends Phaser.Scene {
             this.innout.body.velocity.x = 500;
             this.walker.anims.play('walk');
         }
+        // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
             this.scene.start('GameOverScene');
         }
