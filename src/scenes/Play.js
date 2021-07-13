@@ -21,33 +21,41 @@ class Play extends Phaser.Scene {
 
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
         // Circle that contricts and expands around the button
-        this.innout = this.physics.add.sprite((game.config.width/4), (game.config.height/3), 'rhythm');
+        this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
         this.innout.circleSize = 1.1;
         // breathe button
-        this.breathe = this.physics.add.sprite((game.config.width/4), (game.config.height/3), 'breathe');
+        this.breathe = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'breathe');
+
+        /* NO NEED SINCE WE NO LONGER USE THE ANIMATION */
         // collison box of innout size
-        this.innout.setSize(200, 200, (-20, -1.25));
-        // button animation config
-        this.buttonAnimConfig = {
-            key: 'in-n-out',
-            frames: this.anims.generateFrameNumbers('rhythm', { start: 0, end: 6, first: 0}),
-            frameRate: 10,
-            repeat: -1
-        };
+        //this.innout.setSize(200, 200, (-20, -1.25));
+        //button animation config
+        // this.buttonAnimConfig = {
+        //     key: 'in-n-out',
+        //     frames: this.anims.generateFrameNumbers('rhythm', { start: 0, end: 6, first: 0}),
+        //     frameRate: 10,
+        //     repeat: -1
+        // };
+        //this.anims.create(this.buttonAnimConfig);
+        //this.innout.anims.play('in-n-out');
+        /**********************************************/
+
         // walking animation config
         this.walkingAnim = {
             key: 'walk',
             frames:  this.anims.generateFrameNumbers('walking', { start: 0, end: 6, first: 0}),
             frameRate: 15
         };
-        this.anims.create(this.buttonAnimConfig);
         this.anims.create(this.walkingAnim);
+
         this.walker.body.velocity.x = 0;
-        //this.innout.anims.play('in-n-out');
+        
         //inhale/exhale variable
         this.breatheCount = 0;
         // variable to exapnd/shrink ruthm overlay, if true then shrink, if false then expand.
         this.isDecreasing = true; 
+        // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
+        this.wasPressed = true;  // starts true so player doesn't lose at first beat.
     }
 
     update() {
@@ -63,7 +71,6 @@ class Play extends Phaser.Scene {
             //this.innout.body.velocity.x = 0;
         }
         
-        
         /* 
         checks if space button was pressed and also if walking is not playing,
         if true, then set velocity of all objects to 500 and plays walking animation.
@@ -73,9 +80,10 @@ class Play extends Phaser.Scene {
             //&& this.walker.anims.currentAnim.key === 'walk'))) {
                  // for harsha: no need to check frame since we check if animation is playing anyway
 
+            this.wasPressed = true; // we hit spacebar.
+
             // was spacebar pressed at the correct time?
-            // checks size of the rhythm circle and the breathe button.
-            if (this.innout.displayWidth <= this.breathe.displayWidth) {
+            if (this.innout.displayWidth <= this.breathe.displayWidth) { // checks size of the rhythm circle and the breathe button.
                 this.walker.body.velocity.x = 500;
                 // this.breathe.body.velocity.x = 500;
                 //this.innout.body.velocity.x = 500;
@@ -83,14 +91,20 @@ class Play extends Phaser.Scene {
 
                 this.playInhaleExhale(); // play audio.
 
-            } else { // else you lose.
+            } else { // if it wasn't hit at the right time you lose.
                 this.scene.start('GameOverScene');
             }
-            
-
         }
-        // if player reaches end of screen, then transitions to next scene (-20 so it walker doesn't go off screen)
-        if (this.walker.x > game.config.width - 20) {
+
+        // also lose if you don't hit spacebar in time
+        if (!this.isDecreasing &&                                    // if the cricle is growing
+            !this.wasPressed &&                                      // and we haven't hit the spacebar
+            this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
+                this.scene.start('GameOverScene');                   // you lose
+        }
+        
+        // if player reaches end of screen, then transitions to next scene
+        if (this.walker.x > game.config.width) {
             this.scene.start('GameOverScene');
         }
     }
@@ -122,6 +136,7 @@ class Play extends Phaser.Scene {
 
             if (this.innout.circleSize >= 1.1) { // until it reaches the desired size. 
                 this.isDecreasing = true;        // and we start decreasing again.
+                this.wasPressed = false;         // we can reset wether we hit/pressed spacebar last time
             }
         }
     }
