@@ -32,10 +32,10 @@ class Play extends Phaser.Scene {
         }
         if ((Phaser.Input.Keyboard.JustDown(this.spaceKey)) 
         && (!(this.walker.anims.isPlaying && this.walker.anims.currentAnim.key === 'walk'))) {
-            this.walker.body.velocity.x = 200;
+            this.walker.body.velocity.x = 500;
             this.walker.anims.play('walk');
         }
 
-        
+
     }
 }
