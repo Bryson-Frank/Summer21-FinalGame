@@ -1,11 +1,11 @@
-class Play extends Phaser.Scene {
+class Level_3 extends Phaser.Scene {
     constructor() {
-        super("playScene");
+        super("Level_3");
     }
 
     preload() {
         this.load.image('player', './assets/walker.png');
-        this.load.image('background', './assets/background.png');
+        this.load.image('background3', './assets/forest_background2.png');
         this.load.image('ground', './assets/ground.png');
         this.load.spritesheet('walking', './assets/walker7Frames-01.png', {frameWidth: 110, frameHeight: 187, startFrame: 0, endFrame: 7});
         this.load.image('breathe', './assets/breathe_button.png');
@@ -15,11 +15,22 @@ class Play extends Phaser.Scene {
         }
 
     create() {
-        this.add.sprite(0, 0, 'background').setOrigin(0, 0);
-        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.add.sprite(0, 475, 'ground').setOrigin(0);
+        this.key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
+        this.key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        this.key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        this.key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+        this.key4 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+        this.key5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
+        this.key6 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SIX);
+        this.key7 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
+        this.key8 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
+        this.key9 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
 
-        this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
+        this.add.sprite(0, 0, 'background3').setOrigin(0, 0);
+        this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        //this.add.sprite(0, 475, 'ground').setOrigin(0);
+
+        this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         // Circle that contricts and expands around the button
         this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
         this.innout.circleSize = 1.1;
@@ -100,12 +111,23 @@ class Play extends Phaser.Scene {
         if (!this.isDecreasing &&                                    // if the cricle is growing
             !this.wasPressed &&                                      // and we haven't hit the spacebar
             this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
-                this.scene.start('GameOverScene');                   // you lose
+                //this.scene.start('GameOverScene');                   // you lose
+                this.scene.restart();
         }
         
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
             this.scene.start('GameOverScene');
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.key1)) {
+            this.scene.start("Level_1");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key2)) {
+            this.scene.start("Level_2");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key3)) {
+            this.scene.start("Level_3");
         }
     }
 
