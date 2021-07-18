@@ -12,7 +12,7 @@ class Level_3 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
-        this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 188, frameHeight: 189, startFrame: 0, endFrame: 7});
+        this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 190, frameHeight: 190, startFrame: 0, endFrame: 7});
         }
 
     create() {
