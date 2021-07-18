@@ -89,7 +89,7 @@ class Level_3 extends Phaser.Scene {
             } else { // if it wasn't hit at the right time you lose.
                 this.walker.body.velocity.x = 500;
                 this.walker.anims.play('death');
-                setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
+                //setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
             }
         }
 
@@ -98,7 +98,7 @@ class Level_3 extends Phaser.Scene {
             !this.wasPressed &&                                      // and we haven't hit the spacebar
             this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
                 //this.scene.start('GameOverScene');                   // you lose
-                this.scene.restart();
+                //this.scene.restart();
         }
         
         // if player reaches end of screen, then transitions to next scene
