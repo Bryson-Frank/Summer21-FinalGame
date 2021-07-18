@@ -37,5 +37,20 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
         }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_4");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_5");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_6");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_7");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_8");
+        }
     }
 }

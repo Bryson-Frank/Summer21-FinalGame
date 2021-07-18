@@ -117,7 +117,7 @@ class Level_3 extends Phaser.Scene {
         
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
-            this.scene.start('GameOverScene');
+            this.scene.start('Level_4');
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
@@ -128,6 +128,21 @@ class Level_3 extends Phaser.Scene {
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_4");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key5)) {
+            this.scene.start("Level_5");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key6)) {
+            this.scene.start("Level_6");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key7)) {
+            this.scene.start("Level_7");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key8)) {
+            this.scene.start("Level_8");
         }
     }
 

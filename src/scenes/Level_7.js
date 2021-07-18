@@ -1,11 +1,11 @@
-class Level_2 extends Phaser.Scene {
+class Level_7 extends Phaser.Scene {
     constructor() {
-        super("Level_2");
+        super("Level_7");
     }
 
     preload() {
         this.load.image('player', './assets/walker.png');
-        this.load.image('background2', './assets/background2-01.png');
+        this.load.image('background7', './assets/background7-01.png');
         this.load.image('ground', './assets/ground.png');
         this.load.spritesheet('walking', './assets/walker7Frames-01.png', {frameWidth: 110, frameHeight: 187, startFrame: 0, endFrame: 7});
         this.load.image('breathe', './assets/breathe_button.png');
@@ -26,11 +26,11 @@ class Level_2 extends Phaser.Scene {
         this.key8 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
         this.key9 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
 
-        this.add.sprite(0, 0, 'background2').setOrigin(0, 0);
+        this.add.sprite(0, 0, 'background7').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         //this.add.sprite(0, 475, 'ground').setOrigin(0);
 
-        this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
+        this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         // Circle that contricts and expands around the button
         this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
         this.innout.circleSize = 1.1;
@@ -103,7 +103,7 @@ class Level_2 extends Phaser.Scene {
                 this.playInhaleExhale(); // play audio.
 
             } else { // if it wasn't hit at the right time you lose.
-                this.scene.start('GameOverScene');
+                this.scene.start('Level_8');
             }
         }
 
@@ -117,7 +117,7 @@ class Level_2 extends Phaser.Scene {
         
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
-            this.scene.start('Level_3');
+            this.scene.start('GameOverScene');
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
