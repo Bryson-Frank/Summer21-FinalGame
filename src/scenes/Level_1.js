@@ -5,7 +5,7 @@ class Level_1 extends Phaser.Scene {
 
     preload() {
         this.load.image('player', './assets/walker.png');
-        this.load.image('background', './assets/background.png');
+        this.load.image('background', './assets/background1-01.png');
         this.load.image('ground', './assets/ground.png');
         this.load.spritesheet('walking', './assets/walker7Frames-01.png', {frameWidth: 110, frameHeight: 187, startFrame: 0, endFrame: 7});
         this.load.image('breathe', './assets/breathe_button.png');
