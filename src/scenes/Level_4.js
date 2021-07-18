@@ -6,7 +6,6 @@ class Level_4 extends Phaser.Scene {
     preload() {
         this.load.image('player', './assets/walker.png');
         this.load.image('background4', './assets/background4-01.png');
-        this.load.image('ground', './assets/ground.png');
         this.load.spritesheet('walking', './assets/walker7Frames-01.png', {frameWidth: 110, frameHeight: 187, startFrame: 0, endFrame: 7});
         this.load.image('breathe', './assets/breathe_button.png');
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
@@ -28,7 +27,6 @@ class Level_4 extends Phaser.Scene {
 
         this.add.sprite(0, 0, 'background4').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        this.add.sprite(0, 475, 'ground').setOrigin(0);
 
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
         // Circle that contricts and expands around the button
