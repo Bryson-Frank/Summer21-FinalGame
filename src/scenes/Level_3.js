@@ -12,6 +12,7 @@ class Level_3 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 188, frameHeight: 189, startFrame: 0, endFrame: 7});
         }
 
     create() {
@@ -28,7 +29,6 @@ class Level_3 extends Phaser.Scene {
 
         this.add.sprite(0, 0, 'background3').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        //this.add.sprite(0, 475, 'ground').setOrigin(0);
 
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         // Circle that contricts and expands around the button
@@ -37,28 +37,19 @@ class Level_3 extends Phaser.Scene {
         // breathe button
         this.breathe = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'breathe');
 
-        /* NO NEED SINCE WE NO LONGER USE THE ANIMATION */
-        // collison box of innout size
-        //this.innout.setSize(200, 200, (-20, -1.25));
-        //button animation config
-        // this.buttonAnimConfig = {
-        //     key: 'in-n-out',
-        //     frames: this.anims.generateFrameNumbers('rhythm', { start: 0, end: 6, first: 0}),
-        //     frameRate: 10,
-        //     repeat: -1
-        // };
-        //this.anims.create(this.buttonAnimConfig);
-        //this.innout.anims.play('in-n-out');
-        /**********************************************/
-
         // walking animation config
         this.walkingAnim = {
             key: 'walk',
             frames:  this.anims.generateFrameNumbers('walking', { start: 0, end: 6, first: 0}),
             frameRate: 15
         };
+        this.deathAnim = {
+            key: 'death',
+            frames:  this.anims.generateFrameNumbers('dying', { start: 0, end: 6, first: 0}),
+            frameRate: 10
+        };
         this.anims.create(this.walkingAnim);
-
+        this.anims.create(this.deathAnim);
         this.walker.body.velocity.x = 0;
         
         //inhale/exhale variable
@@ -76,10 +67,8 @@ class Level_3 extends Phaser.Scene {
 
         // checks if walking animation is playing, if not,
         // then it sets x-velocity of all objects to 0
-        if (!(this.walker.anims.isPlaying)) {// && this.walker.anims.currentAnim.key === 'walk')) {
+        if (!(this.walker.anims.isPlaying)) {
             this.walker.body.velocity.x = 0;
-            //this.breathe.body.velocity.x = 0;
-            //this.innout.body.velocity.x = 0;
         }
         
         /* 
@@ -88,22 +77,19 @@ class Level_3 extends Phaser.Scene {
         */
         if ((Phaser.Input.Keyboard.JustDown(this.spaceKey)) 
         && (!(this.walker.anims.isPlaying))) { 
-            //&& this.walker.anims.currentAnim.key === 'walk'))) {
-                 // for harsha: no need to check frame since we check if animation is playing anyway
-
             this.wasPressed = true; // we hit spacebar.
 
             // was spacebar pressed at the correct time?
             if (this.innout.displayWidth <= this.breathe.displayWidth) { // checks size of the rhythm circle and the breathe button.
                 this.walker.body.velocity.x = 500;
-                // this.breathe.body.velocity.x = 500;
-                //this.innout.body.velocity.x = 500;
                 this.walker.anims.play('walk');
 
                 this.playInhaleExhale(); // play audio.
 
             } else { // if it wasn't hit at the right time you lose.
-                this.scene.start('GameOverScene');
+                this.walker.body.velocity.x = 500;
+                this.walker.anims.play('death');
+                setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
             }
         }
 
