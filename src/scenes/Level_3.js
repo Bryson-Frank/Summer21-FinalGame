@@ -91,7 +91,7 @@ class Level_3 extends Phaser.Scene {
             } else { // if it wasn't hit at the right time you lose.
                 this.walker.body.velocity.x = 100;
                 this.walker.anims.play('death');
-                //setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
+                setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
             }
         }
 
