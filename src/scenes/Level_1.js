@@ -67,6 +67,9 @@ class Level_1 extends Phaser.Scene {
         this.isDecreasing = true; 
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
+
+        game.currLvl = 0;
+        console.log(game.currLvl);
     }
 
     update() {

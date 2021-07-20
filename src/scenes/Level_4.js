@@ -67,6 +67,7 @@ class Level_4 extends Phaser.Scene {
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
 
         game.speed = 0.013;
+        game.currLvl = 3;
     }
 
     update() {
