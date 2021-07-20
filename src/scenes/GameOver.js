@@ -11,6 +11,11 @@ class GameOver extends Phaser.Scene {
         this.add.text(100, 164, 'Press Space to Restart').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        this.add.text(100, 260, 'Press C to continue').setOrigin(0, 0);
+        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+
+        this.lvls = ["Level_1", "Level_2", "Level_3", "Level_4", "Level_5", "Level_6", "Level_7", "Level_8"];
+
         this.key0 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
         this.key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
         this.key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
@@ -26,6 +31,8 @@ class GameOver extends Phaser.Scene {
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
             this.scene.start("Level_1");
+        } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) {
+            this.scene.start(this.lvls[game.currLvl]);
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
