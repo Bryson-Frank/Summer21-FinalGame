@@ -67,6 +67,8 @@ class Level_6 extends Phaser.Scene {
         this.isDecreasing = true; 
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
+
+       game.speed = 0.01;
     }
 
     update() {
@@ -162,14 +164,16 @@ class Level_6 extends Phaser.Scene {
         this.innout.setScale(this.innout.circleSize); // update the scale.
         // if we are decreasing,
         if (this.isDecreasing) {
-            this.innout.circleSize -= .01; // shrink the circle
+            this.innout.circleSize -= game.speed; // shrink the circle
 
             if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
                 this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
+                game.speed += 0.0002;
+                console.log(game.speed);
             }
             
         } else { // if we are not decreasing,
-            this.innout.circleSize += .01; // expand the circle
+            this.innout.circleSize += game.speed; // expand the circle
 
             if (this.innout.circleSize >= 1.1) { // until it reaches the desired size. 
                 this.isDecreasing = true;        // and we start decreasing again.

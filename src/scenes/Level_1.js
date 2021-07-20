@@ -93,8 +93,8 @@ class Level_1 extends Phaser.Scene {
 
             this.wasPressed = true; // we hit spacebar.
 
-            // was spacebar pressed at the correct time?
-            if (this.innout.displayWidth <= this.breathe.displayWidth) { // checks size of the rhythm circle and the breathe button.
+            // was spacebar pressed at the correct time?     (+30 to give more leway)
+            if (this.innout.displayWidth <= this.breathe.displayWidth + 30) { // checks size of the rhythm circle and the breathe button.
                 this.walker.body.velocity.x = 500;
                 // this.breathe.body.velocity.x = 500;
                 //this.innout.body.velocity.x = 500;
@@ -161,14 +161,14 @@ class Level_1 extends Phaser.Scene {
         this.innout.setScale(this.innout.circleSize); // update the scale.
         // if we are decreasing,
         if (this.isDecreasing) {
-            this.innout.circleSize -= .01; // shrink the circle
+            this.innout.circleSize -= game.speed; // shrink the circle
 
             if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
                 this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
             }
             
         } else { // if we are not decreasing,
-            this.innout.circleSize += .01; // expand the circle
+            this.innout.circleSize += game.speed; // expand the circle
 
             if (this.innout.circleSize >= 1.1) { // until it reaches the desired size. 
                 this.isDecreasing = true;        // and we start decreasing again.
