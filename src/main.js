@@ -22,4 +22,4 @@ let game = new Phaser.Game(config);
 
 game.speed = 0.01;
 
-game.currLvl = 1;
+game.currLvl = 1; // to know what level to restart upon losing.
