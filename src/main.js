@@ -21,3 +21,5 @@ let config = {
 let game = new Phaser.Game(config); 
 
 game.speed = 0.01;
+
+game.currLvl = 1;
