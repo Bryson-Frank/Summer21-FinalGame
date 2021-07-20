@@ -70,6 +70,8 @@ class Level_2 extends Phaser.Scene {
 
         game.speed = .011;
         console.log(game.speed);
+
+        game.currLvl = 1;
     }
 
     update() {
