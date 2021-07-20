@@ -65,6 +65,8 @@ class Level_4 extends Phaser.Scene {
         this.isDecreasing = true; 
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
+
+        game.speed = 0.013;
     }
 
     update() {
@@ -92,7 +94,7 @@ class Level_4 extends Phaser.Scene {
             this.wasPressed = true; // we hit spacebar.
 
             // was spacebar pressed at the correct time?
-            if (this.innout.displayWidth <= this.breathe.displayWidth) { // checks size of the rhythm circle and the breathe button.
+            if (this.innout.displayWidth <= this.breathe.displayWidth+ 35) { // checks size of the rhythm circle and the breathe button.
                 this.walker.body.velocity.x = 500;
                 // this.breathe.body.velocity.x = 500;
                 //this.innout.body.velocity.x = 500;
@@ -159,14 +161,14 @@ class Level_4 extends Phaser.Scene {
         this.innout.setScale(this.innout.circleSize); // update the scale.
         // if we are decreasing,
         if (this.isDecreasing) {
-            this.innout.circleSize -= .01; // shrink the circle
+            this.innout.circleSize -= game.speed; // shrink the circle
 
             if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
                 this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
             }
             
         } else { // if we are not decreasing,
-            this.innout.circleSize += .01; // expand the circle
+            this.innout.circleSize += game.speed; // expand the circle
 
             if (this.innout.circleSize >= 1.1) { // until it reaches the desired size. 
                 this.isDecreasing = true;        // and we start decreasing again.
