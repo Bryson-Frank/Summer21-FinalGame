@@ -5,10 +5,16 @@ class Menu extends Phaser.Scene {
 
     preload() {
         this.load.image('title', './assets/menu.png');
+        this.load.audio('birdSounds', 'assets/birdsForBreathe.wav'); 
+        // Found at https://freesound.org/people/hargissssound/sounds/345852/ 
     }
 
     create() {
         this.add.image(0, 0, 'title').setOrigin(0, 0);
+
+        // Help fpumd at https://www.youtube.com/watch?v=SRqKOccMWbc 
+        musicTrack1 = this.sound.add('birdSounds', {volume: 2.5, loop: true});
+        musicTrack1.play()
 
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
@@ -40,16 +46,16 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
         }
-        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+        if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
         }
-        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+        if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
         }
-        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+        if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
         }
-        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+        if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
         }
     }

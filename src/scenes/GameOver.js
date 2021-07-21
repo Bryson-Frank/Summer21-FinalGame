@@ -29,9 +29,15 @@ class GameOver extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
+        if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) { // restart from the beginning.
             this.scene.start("Level_1");
-        } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) {
+            musicTrack1.play();
+            if (synthIsPlaying) {
+                musicTrack2.stop();
+                synthIsPlaying = false;
+            }
+            
+        } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) { // restart where you died.
             this.scene.start(this.lvls[game.currLvl]);
         }
 
@@ -43,6 +49,21 @@ class GameOver extends Phaser.Scene {
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key4)) {
+            this.scene.start("Level_4");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key5)) {
+            this.scene.start("Level_5");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key6)) {
+            this.scene.start("Level_6");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key7)) {
+            this.scene.start("Level_7");
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.key8)) {
+            this.scene.start("Level_8");
         }
     }
 }

@@ -23,3 +23,6 @@ let game = new Phaser.Game(config);
 game.speed = 0.01;
 
 game.currLvl = 1;
+
+let musicTrack1, musicTrack2;
+let synthIsPlaying = false;
