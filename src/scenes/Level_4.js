@@ -11,6 +11,7 @@ class Level_4 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.audio('level4Audio', 'assets/level4.wav');
         }
 
     create() {
@@ -68,6 +69,8 @@ class Level_4 extends Phaser.Scene {
 
         game.speed = 0.013;
         game.currLvl = 3;
+        this.level4Audio = this.sound.add('level4Audio', {volume: 0.6});
+        this.level4Audio.play();
     }
 
     update() {
@@ -124,27 +127,35 @@ class Level_4 extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.level4Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.level4Audio.pause();
         }
     }
 

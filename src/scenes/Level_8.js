@@ -12,6 +12,7 @@ class Level_8 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.audio('level8Audio', 'assets/level8.wav');
         }
 
     create() {
@@ -69,6 +70,8 @@ class Level_8 extends Phaser.Scene {
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
 
         game.currLvl = 7;
+        this.level8Audio = this.sound.add('level8Audio', {volume: 0.6});
+        this.level8Audio.play();
     }
 
     update() {
@@ -120,31 +123,40 @@ class Level_8 extends Phaser.Scene {
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
             this.scene.start('GameOverScene');
+            this.level8Audio.pause();
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.level8Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.level8Audio.pause();
         }
     }
 

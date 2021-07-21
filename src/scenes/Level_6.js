@@ -12,6 +12,7 @@ class Level_6 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.audio('level6Audio', 'assets/level6.wav');
         }
 
     create() {
@@ -70,11 +71,12 @@ class Level_6 extends Phaser.Scene {
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
 
-       game.speed = 0.01;
-       game.currLvl = 5;
+        game.speed = 0.01;
+        game.currLvl = 5;
 
        
-       
+        this.level6Audio = this.sound.add('level6Audio', {volume: 0.6});
+        this.level6Audio.play();
     }
 
     update() {
@@ -129,27 +131,35 @@ class Level_6 extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.level6Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.level6Audio.pause();
         }
     }
 
