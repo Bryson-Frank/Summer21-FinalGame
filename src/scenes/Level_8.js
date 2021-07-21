@@ -7,7 +7,7 @@ class Level_8 extends Level {
         super.preload();
         this.load.image('background8', './assets/background8-01.png');
         this.load.audio('level8Audio', 'assets/level8.wav');
-        }
+    }
 
     initBckgrnd() {
         this.add.sprite(0, 0, 'background8').setOrigin(0, 0);

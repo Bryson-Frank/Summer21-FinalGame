@@ -213,6 +213,10 @@ class Level extends Phaser.Scene {
             this.scene.start("Level_8");
             this.nextLvlMusic();
         }
+        if (Phaser.Input.Keyboard.JustDown(this.key9)) {
+            this.scene.start("Credits");
+            this.nextLvlMusic();
+        }
     }
 
     
