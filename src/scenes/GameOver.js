@@ -30,7 +30,12 @@ class GameOver extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) { // restart from the beginning.
-            this.scene.start("Level_1"); 
+            this.scene.start("Level_1");
+            musicTrack1.play();
+            if (synthIsPlaying) {
+                musicTrack2.stop();
+                synthIsPlaying = false;
+            }
             
         } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) { // restart where you died.
             this.scene.start(this.lvls[game.currLvl]);

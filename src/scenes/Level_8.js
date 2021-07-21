@@ -33,7 +33,7 @@ class Level_8 extends Level {
 
             if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
                 this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
-                game.speed -= 0.001;
+                game.speed *= 0.8;
             }
             
         } else { // if we are not decreasing,

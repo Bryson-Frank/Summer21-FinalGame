@@ -13,7 +13,7 @@ class Menu extends Phaser.Scene {
         this.add.image(0, 0, 'title').setOrigin(0, 0);
 
         // Help fpumd at https://www.youtube.com/watch?v=SRqKOccMWbc 
-        musicTrack1 = this.sound.add('birdSounds', {volume: 1, loop: true});
+        musicTrack1 = this.sound.add('birdSounds', {volume: 2.5, loop: true});
         musicTrack1.play()
 
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);

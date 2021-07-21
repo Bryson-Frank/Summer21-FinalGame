@@ -24,4 +24,8 @@ class Level_4 extends Level {
         this.level4Audio = this.sound.add('level4Audio', {volume: 0.6});
         this.level4Audio.play();
     }
+
+    stopNarration() {
+        this.level4Audio.pause();
+    }
 }

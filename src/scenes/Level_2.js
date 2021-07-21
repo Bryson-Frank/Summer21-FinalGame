@@ -17,7 +17,6 @@ class Level_2 extends Level {
 
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
-       // super.create();
 
         game.speed = .011;
         game.currLvl = 1;
