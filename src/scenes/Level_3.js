@@ -19,5 +19,6 @@ class Level_3 extends Level {
         game.speed = 0.012;
         game.currLvl = 2;
         this.nextLvl = 'Level_4';
+
     }
 }
