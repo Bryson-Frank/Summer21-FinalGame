@@ -12,6 +12,7 @@ class Level_1 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.audio('level1Audio', 'assets/level1.wav'); 
         }
 
     create() {
@@ -70,6 +71,8 @@ class Level_1 extends Phaser.Scene {
 
         game.currLvl = 0;
         console.log(game.currLvl);
+        this.level1Audio = this.sound.add('level1Audio', {volume: 0.6});
+        this.level1Audio.play();
     }
 
     update() {
@@ -120,31 +123,40 @@ class Level_1 extends Phaser.Scene {
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
             this.scene.start('Level_2');
+            this.level1Audio.pause();
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.level1Audio.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.level1Audio.pause();
         }
     }
 
