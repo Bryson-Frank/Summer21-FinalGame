@@ -6,7 +6,8 @@ class Level_4 extends Level {
     preload() {
         super.preload();
         this.load.image('background4', './assets/background4-01.png');
-        }
+        this.load.audio('level4Audio', 'assets/level4.wav');
+    }
 
     initBckgrnd() {
         this.add.sprite(0, 0, 'background4').setOrigin(0, 0);
@@ -19,5 +20,8 @@ class Level_4 extends Level {
         game.speed = 0.013;
         game.currLvl = 3;
         this.nextLvl = 'Level_5';
+
+        this.level4Audio = this.sound.add('level4Audio', {volume: 0.6});
+        this.level4Audio.play();
     }
 }

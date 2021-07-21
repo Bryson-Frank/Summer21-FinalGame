@@ -6,15 +6,27 @@ class Level_5 extends Level {
     preload() {
         super.preload();
         this.load.image('background5', './assets/background5-01.png');
+        this.load.audio('synthSounds', 'assets/synthForBreathe.mp3'); 
+        // Found at https://freesound.org/people/hargissssound/sounds/345852/ 
+        this.load.audio('level5Audio', 'assets/level5.wav');
         }
 
     initBckgrnd() {
+
         this.add.sprite(0, 0, 'background5').setOrigin(0, 0);
     }
 
     initLevel() {
+        musicTrack1.pause();
+      
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
+      
+        this.musicTrack2 = this.sound.add('synthSounds', {volume: 0.4, loop: true});
+        this.musicTrack2.play();  // implement synths
+        
+        this.level5Audio = this.sound.add('level5Audio', {volume: 0.6});
+        this.level5Audio.play();
         
         game.speed = 0.013; // return to slow speed.
         console.log(game.speed);
@@ -43,5 +55,9 @@ class Level_5 extends Level {
                 this.wasPressed = false;         // we can reset wether we hit/pressed spacebar last time
             }
         }
+    }
+  
+    nextLvlMusic() {
+      musicTrack1.play();
     }
 }

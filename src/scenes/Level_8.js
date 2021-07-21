@@ -6,6 +6,7 @@ class Level_8 extends Level {
     preload() {
         super.preload();
         this.load.image('background8', './assets/background8-01.png');
+        this.load.audio('level8Audio', 'assets/level8.wav');
         }
 
     initBckgrnd() {
@@ -18,6 +19,9 @@ class Level_8 extends Level {
 
         game.currLvl = 7;
         this.nextLvl = 'GameOverScene' // needs to change to credits.
+
+        this.level8Audio = this.sound.add('level8Audio', {volume: 0.6});
+        this.level8Audio.play();
     }
 
     setCircleSize() {
@@ -40,5 +44,9 @@ class Level_8 extends Level {
                 this.wasPressed = false;         // we can reset wether we hit/pressed spacebar last time
             }
         }
+    }
+  
+    nextLvlMusic() {
+      this.level8Audio.pause();
     }
 }

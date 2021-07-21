@@ -6,6 +6,7 @@ class Level_6 extends Level {
     preload() {
         super.preload();
         this.load.image('background6', './assets/background6-01.png');
+        this.load.audio('level6Audio', 'assets/level6.wav');
         }
 
     initBckgrnd() {
@@ -15,6 +16,9 @@ class Level_6 extends Level {
     initLevel() {
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
+      
+        this.level6Audio = this.sound.add('level6Audio', {volume: 0.6});
+        this.level6Audio.play();
      
         game.speed = 0.01;
         game.currLvl = 5;

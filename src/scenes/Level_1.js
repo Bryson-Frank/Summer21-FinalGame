@@ -8,6 +8,7 @@ class Level_1 extends Level {
         super.preload();
         this.load.image('background', './assets/background1-01.png');
         this.load.image('ground', './assets/ground.png');
+        this.load.audio('level1Audio', 'assets/level1.wav'); 
         }
 
     initBckgrnd() {
@@ -20,6 +21,9 @@ class Level_1 extends Level {
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/4, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
        // super.create();
+      
+        this.level1Audio = this.sound.add('level1Audio', {volume: 0.6});
+        this.level1Audio.play();
 
         game.currLvl = 0;
         game.speed = 0.01;
@@ -29,5 +33,9 @@ class Level_1 extends Level {
 
     update() {
         super.update();
+    }
+     
+    nextLvlMusic() {
+      this.level1Audio.pause();
     }
 }
