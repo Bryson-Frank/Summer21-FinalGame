@@ -12,6 +12,8 @@ class Level_5 extends Phaser.Scene {
         this.load.spritesheet('rhythm', './assets/outer_ring.png', {frameWidth: 298, frameHeight: 400, startFrame: 0, endFrame: 7});
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
+        this.load.audio('synthSounds', 'assets/synthForBreathe.mp3'); 
+        // Found at https://freesound.org/people/hargissssound/sounds/345852/ 
         }
 
     create() {
@@ -26,6 +28,8 @@ class Level_5 extends Phaser.Scene {
         this.key8 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
         this.key9 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
 
+        //musicTrack1.setVolume(0); ////////////////////////
+        
         this.add.sprite(0, 0, 'background5').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         //this.add.sprite(0, 475, 'ground').setOrigin(0);
@@ -71,10 +75,14 @@ class Level_5 extends Phaser.Scene {
         game.speed = 0.013; // return to slow speed.
         console.log(game.speed);
         game.currLvl = 4;
+        
+        this.musicTrack2 = this.sound.add('synthSounds', {volume: 0.4, loop: true});
+        this.musicTrack2.play();  // implement synths
+        
     }
 
     update() {
-
+        musicTrack1.pause();
         // update the rhythm circle size by changing its scale.
         this.setCircleSize(); 
 
@@ -121,32 +129,50 @@ class Level_5 extends Phaser.Scene {
         
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
+            //musicTrack2.setVolume(0); ////////////////////////
             this.scene.start('Level_6');
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.musicTrack2.pause();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.musicTrack2.pause();
+            musicTrack1.play();
         }
     }
 

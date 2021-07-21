@@ -5,10 +5,15 @@ class Menu extends Phaser.Scene {
 
     preload() {
         this.load.image('title', './assets/menu.png');
+        this.load.audio('birdSounds', 'assets/birdsForBreathe.wav'); 
+        // Found at https://freesound.org/people/hargissssound/sounds/345852/ 
     }
 
     create() {
         this.add.image(0, 0, 'title').setOrigin(0, 0);
+
+        musicTrack1 = this.sound.add('birdSounds', {volume: 1, loop: true});
+        musicTrack1.play()
 
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 

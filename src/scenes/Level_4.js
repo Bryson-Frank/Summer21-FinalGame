@@ -117,7 +117,9 @@ class Level_4 extends Phaser.Scene {
         
         // if player reaches end of screen, then transitions to next scene
         if (this.walker.x > game.config.width) {
+            
             this.scene.start('Level_5');
+            
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
