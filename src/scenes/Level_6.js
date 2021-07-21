@@ -26,6 +26,8 @@ class Level_6 extends Phaser.Scene {
         this.key8 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
         this.key9 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.NINE);
 
+        //musicTrack1.setVolume(0); ////////////
+
         this.add.sprite(0, 0, 'background6').setOrigin(0, 0);
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         //this.add.sprite(0, 475, 'ground').setOrigin(0);
@@ -70,10 +72,12 @@ class Level_6 extends Phaser.Scene {
 
        game.speed = 0.01;
        game.currLvl = 5;
+
+       
+       
     }
 
     update() {
-
         // update the rhythm circle size by changing its scale.
         this.setCircleSize(); 
 
