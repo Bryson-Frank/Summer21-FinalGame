@@ -29,7 +29,7 @@ class Level_7 extends Level {
 
             if (this.innout.displayWidth <= this.breathe.displayWidth - 20) {
                 this.isDecreasing = false; // and if we reached the breathe button (and some for some leaway), we are no longer decreasing
-                game.speed += 0.0008;
+                game.speed *= 1.1;
                 console.log(game.speed);
             }
             
@@ -57,7 +57,7 @@ class Level_7 extends Level {
             this.wasPressed = true; // we hit spacebar.
 
             // was spacebar pressed at the correct time?
-            if (this.innout.displayWidth <= this.breathe.displayWidth) { // checks size of the rhythm circle and the breathe button.
+            if (this.innout.displayWidth <= this.breathe.displayWidth + 30) { // checks size of the rhythm circle and the breathe button.
                 this.walker.body.velocity.x = 500;
                 this.walker.body.velocity.y = -100; // goes in diag.  THIS IS WHY WE CAN'T USE DEFAULT FUNC.
 
@@ -66,7 +66,8 @@ class Level_7 extends Level {
                 this.playInhaleExhale(); // play audio.
 
             } else { // if it wasn't hit at the right time you lose.
-                this.scene.start('Level_8');
+                console.log('lost');
+                this.scene.start('GameOverScene');
             }
         }
 

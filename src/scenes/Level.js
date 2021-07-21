@@ -53,35 +53,39 @@ class Level extends Phaser.Scene {
         this.isDecreasing = true; 
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
-
+        this.gameIsOver = false;
         // create level specific variables.
         this.initLevel();
     }
 
     update() { // Core code of gameplay used in all levels.
 
-        // update the rhythm circle size by changing its scale. Last 5 levels use their own defns to change speed in level itself.
-        this.setCircleSize(); 
-        
-        // checks if walking animation is playing, if not,
-        // then it sets x-velocity of walker to 0
-        if (!this.walker.anims.isPlaying) {
-            this.walker.body.velocity.x = 0;
-            this.walker.body.velocity.y = 0;
-        }
-        
-        this.checkAccuracy(); // spacebar was hit, was it at the correct time?
+        if (!this.gameIsOver) {
 
-        // also lose if you don't hit spacebar in time
-        if (!this.isDecreasing &&                                    // if the cricle is growing
-            !this.wasPressed &&                                      // and we haven't hit the spacebar
-            this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
-                this.scene.start('GameOverScene');                   // you lose
-        }
-        
-        // if player reaches end of screen, then transitions to next scene
-        if (this.walker.x > game.config.width) {
-            this.scene.start(this.nextLvl);     // nextLvl is updated in the initLvl of every level.
+            // update the rhythm circle size by changing its scale. Last 5 levels use their own defns to change speed in level itself.
+            this.setCircleSize();
+            
+            // checks if walking animation is playing, if not,
+            // then it sets x-velocity of walker to 0
+            if (!this.walker.anims.isPlaying) {
+                this.walker.body.velocity.x = 0;
+                this.walker.body.velocity.y = 0;
+            }
+            
+            this.checkAccuracy(); // spacebar was hit, was it at the correct time?
+
+            // also lose if you don't hit spacebar in time
+            if (!this.isDecreasing &&                                    // if the cricle is growing
+                !this.wasPressed &&                                      // and we haven't hit the spacebar
+                this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
+                this.GameOver();         
+            }
+            
+            // if player reaches end of screen, then transitions to next scene
+            if (this.walker.x > game.config.width) {
+                this.scene.start(this.nextLvl);     // nextLvl is updated in the initLvl of every level.
+                this.nextLvlMusic();
+            }
         }
 
         this.cheats(); // allows num keys to travel to the different levels.
@@ -119,7 +123,7 @@ class Level extends Phaser.Scene {
     setCircleSize() { // default expand/shrink of circle, speed varies with global variable.
 
         this.innout.setScale(this.innout.circleSize); // update the scale.
-        
+
         // if we are decreasing,
         if (this.isDecreasing) {
             this.innout.circleSize -= game.speed; // shrink the circle
@@ -156,41 +160,64 @@ class Level extends Phaser.Scene {
                 this.playInhaleExhale(); // play audio.
 
             } else { // if it wasn't hit at the right time you lose.
-                this.walker.anims.play('death');
-                //setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
-                this.walker.on('animationcomplete', () => {
-                    this.scene.start('GameOverScene');
-                });
+                this.GameOver();
             }
         }
+    }
+
+    GameOver() {
+        this.walker.anims.play('death');
+        this.gameIsOver = true;
+        this.stopNarration();
+        //setTimeout(()=>(this.scene.start('GameOverScene')), 1000);
+        this.walker.on('animationcomplete', () => {
+            this.scene.start('GameOverScene');
+        });
+    }
+
+    stopNarration() {
+
     }
 
     // Check for Cheat inputs.
     cheats() {
         if (Phaser.Input.Keyboard.JustDown(this.key1)) {
             this.scene.start("Level_1");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key2)) {
             this.scene.start("Level_2");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key3)) {
             this.scene.start("Level_3");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key4)) {
             this.scene.start("Level_4");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key5)) {
             this.scene.start("Level_5");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key6)) {
             this.scene.start("Level_6");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key7)) {
             this.scene.start("Level_7");
+            this.nextLvlMusic();
         }
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
+            this.nextLvlMusic();
         }
+    }
+
+    
+    nextLvlMusic() {
+
     }
 
     // Both defined in every Level Scene.
