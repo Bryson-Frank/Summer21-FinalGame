@@ -70,6 +70,9 @@ class Level_7 extends Level {
                 this.scene.start('GameOverScene');
             }
         }
+    }
+
+    sendCloud() { // we don't want clouds.
 
     }
 }

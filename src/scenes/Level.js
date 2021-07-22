@@ -17,6 +17,9 @@ class Level extends Phaser.Scene {
         this.load.audio('exhale', 'assets/exhale.wav');
         this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 190, frameHeight: 190, startFrame: 0, endFrame: 7});
         this.load.spritesheet('windGust', './assets/windGust-01.png', {frameWidth: 110, frameHeight: 60, startFrame: 0, endFrame: 4});
+        this.load.image('cloud1', './assets/cloud1.png');
+        this.load.image('cloud2', './assets/cloud2.png');
+        this.load.image('cloud3', './assets/cloud3.png');
         }
 
     create() {
@@ -24,6 +27,13 @@ class Level extends Phaser.Scene {
         this.defineKeys();
     
         this.initBckgrnd(); // load level specific background art.
+
+        this.cloudNum = Phaser.Math.RND.integerInRange(1, 3);      // random cloud sprite.
+        this.cloudHeight = Phaser.Math.RND.integerInRange(0, 100); // random height within range.
+
+        this.cloud1 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud1').setOrigin(0, 0);
+        this.cloud2 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud2').setOrigin(0, 0);
+        this.cloud3 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud3').setOrigin(0, 0);
 
         // Circle that contricts and expands around the button
         this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
@@ -66,13 +76,19 @@ class Level extends Phaser.Scene {
         // variable to know if spacebar has been pressed, used to go to end screen if a beat was missed.
         this.wasPressed = true;  // starts true so player doesn't lose at first beat.
         this.gameIsOver = false;
+        if (game.currLvl == 0) {        // reset only if it is the first level.
+            this.playerStarted = false;
+        }
         // create level specific variables.
+
         this.initLevel();
     }
 
     update() { // Core code of gameplay used in all levels.
 
         if (!this.gameIsOver) {
+
+            this.sendCloud();
 
             // update the rhythm circle size by changing its scale. Last 5 levels use their own defns to change speed in level itself.
             this.setCircleSize();
@@ -100,6 +116,16 @@ class Level extends Phaser.Scene {
 
     windGust(){
         this.anims.play('gust');
+    }
+
+    sendCloud() { // send a cloud onto the scene. no need to repeat because player changes scene rather fast anyway.
+        if (this.cloudNum == 1) {
+            this.cloud1.body.velocity.x = -70;
+        } else if (this.cloudNum == 2) {
+            this.cloud2.body.velocity.x = -70;   
+        } else if (this.cloudNum == 3) {
+            this.cloud3.body.velocity.x = -70;
+        }
     }
 
 

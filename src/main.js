@@ -50,3 +50,4 @@ game.currLvl = 0;
 game.playerStarted = false;  // this allows for the narration to run if players want without losing.
 
 let musicTrack1, musicTrack2;
+let synthIsPlaying;
