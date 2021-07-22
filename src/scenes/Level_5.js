@@ -23,8 +23,14 @@ class Level_5 extends Level {
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
 
-        musicTrack2 = this.sound.add('synthSounds', {volume: 0.6, loop: true});
-        musicTrack2.play();  // implement synths
+        if (typeof musicTrack2 != 'object') { // define the music only once.
+            musicTrack2 = this.sound.add('synthSounds', {volume: 0.6, loop: true}); 
+        }
+        if (!synthIsPlaying) {           // We want to be playing the music once at a time. 
+            console.log('playing synth')
+            musicTrack2.play();          // implement synths
+            synthIsPlaying = true;       // so music doesnt play over itself.
+        }
 
         this.level5Audio = this.sound.add('level5Audio', {volume: 0.6});
         this.level5Audio.play();
@@ -58,11 +64,16 @@ class Level_5 extends Level {
         }
     }
 
+    sendCloud() { //we want this empty so no clouds spawn.
+
+    }
+
     stopNarration() {
         this.level5Audio.pause();
     }
+
     nextLvlMusic() {
-        musicTrack2.pause();
+        musicTrack2.stop();
         musicTrack1.play();
         this.level5Audio.pause();
         console.log('stoped music');
