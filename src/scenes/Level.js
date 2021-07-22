@@ -16,7 +16,7 @@ class Level extends Phaser.Scene {
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
         this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 190, frameHeight: 190, startFrame: 0, endFrame: 7});
-        this.load.spritesheet('windGust', './assets/windGust-01.png', {frameWidth: 110, frameHeight: 60, startFrame: 0, endFrame: 4});
+        this.load.spritesheet('windGust', './assets/windGust-01.png', {frameWidth: 110, frameHeight: 60, startFrame: 0, endFrame: 5});
         }
 
     create() {
@@ -24,6 +24,8 @@ class Level extends Phaser.Scene {
         this.defineKeys();
     
         this.initBckgrnd(); // load level specific background art.
+
+        this.wind = this.physics.add.sprite(1200, 380, 'windGust');
 
         // Circle that contricts and expands around the button
         this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
@@ -51,10 +53,10 @@ class Level extends Phaser.Scene {
 
         this.windAnim = {
             key: 'gust',
-            frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 4, first: 0}),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 5, first: 0}),
+            frameRate: 3,
             repeat: -1,
-            repeatDelay: 1000
+            repeatDelay: 3000
         };
 
         this.anims.create(this.windAnim);
@@ -68,9 +70,17 @@ class Level extends Phaser.Scene {
         this.gameIsOver = false;
         // create level specific variables.
         this.initLevel();
+
+        this.windGust();
     }
 
     update() { // Core code of gameplay used in all levels.
+        if(this.wind.body.position.x <= 0) {
+            this.wind.setX(1200);
+        }
+        if(this.wind.anims.isPlaying) {
+            this.wind.body.velocity.x = -50;
+        }
 
         if (!this.gameIsOver) {
 
@@ -99,7 +109,7 @@ class Level extends Phaser.Scene {
     }
 
     windGust(){
-        this.anims.play('gust');
+        this.wind.anims.play('gust');
     }
 
 
