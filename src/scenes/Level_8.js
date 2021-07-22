@@ -18,7 +18,7 @@ class Level_8 extends Level {
         this.walker.body.velocity.x = 0;
 
         game.currLvl = 7;
-        this.nextLvl = 'GameOverScene' // needs to change to credits.
+        this.nextLvl = 'Credits' // needs to change to credits.
 
         this.level8Audio = this.sound.add('level8Audio', {volume: 0.6});
         this.level8Audio.play();
