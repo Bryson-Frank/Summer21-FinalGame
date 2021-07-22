@@ -54,9 +54,9 @@ class Level extends Phaser.Scene {
         this.windAnim = {
             key: 'gust',
             frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 5, first: 0}),
-            frameRate: 3,
+            frameRate: 4,
             repeat: -1,
-            repeatDelay: 3000
+            repeatDelay: 1000
         };
 
         this.anims.create(this.windAnim);
@@ -71,7 +71,9 @@ class Level extends Phaser.Scene {
         // create level specific variables.
         this.initLevel();
 
-        this.windGust();
+        if (this.nextLvl != 'Level_5'){
+            this.windGust();
+        }
     }
 
     update() { // Core code of gameplay used in all levels.
