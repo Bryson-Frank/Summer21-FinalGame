@@ -3,15 +3,15 @@ class GameOver extends Phaser.Scene {
         super("GameOverScene");
     }
 
-    // preLoad() {
-    // }
+    preload() {
+        this.load.image('gameover', './assets/game_over.png');
+    }
 
     create() {
-        this.add.text(100, 100, 'GAME OVER').setOrigin(0, 0);
-        this.add.text(100, 164, 'Press Space to Restart').setOrigin(0, 0);
+        this.add.image(0, 0, 'gameover').setOrigin(0, 0);  
+
         this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.add.text(100, 260, 'Press C to continue').setOrigin(0, 0);
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         this.lvls = ["Level_1", "Level_2", "Level_3", "Level_4", "Level_5", "Level_6", "Level_7", "Level_8"];
