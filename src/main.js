@@ -44,7 +44,9 @@ let game = new Phaser.Game(config);
 
 game.speed = 0.01;
 
-game.currLvl = 1;
+game.currLvl = 0;
+
+// variable to keep player from losing at first level before hitting spacebar once.
+game.playerStarted = false;  // this allows for the narration to run if players want without losing.
 
 let musicTrack1, musicTrack2;
-let synthIsPlaying = false;

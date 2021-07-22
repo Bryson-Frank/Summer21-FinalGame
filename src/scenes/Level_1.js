@@ -31,7 +31,7 @@ class Level_1 extends Level {
         console.log(game.currLvl);
         this.nextLvl = 'Level_2';
     }
-    
+
     // End Narration on gameOver
     stopNarration() {
         this.level1Audio.pause();
