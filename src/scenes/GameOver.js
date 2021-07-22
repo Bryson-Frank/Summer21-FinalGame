@@ -65,5 +65,8 @@ class GameOver extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.key8)) {
             this.scene.start("Level_8");
         }
+        if (Phaser.Input.Keyboard.JustDown(this.key9)) {
+            this.scene.start("Credits")
+        }
     }
 }

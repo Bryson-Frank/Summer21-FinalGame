@@ -16,6 +16,7 @@ class Level extends Phaser.Scene {
         this.load.audio('inhale', 'assets/inhale.wav');
         this.load.audio('exhale', 'assets/exhale.wav');
         this.load.spritesheet('dying', './assets/death-01.png', {frameWidth: 190, frameHeight: 190, startFrame: 0, endFrame: 7});
+        this.load.spritesheet('windGust', './assets/windGust-01.png', {frameWidth: 110, frameHeight: 60, startFrame: 0, endFrame: 4});
         }
 
     create() {
@@ -45,7 +46,18 @@ class Level extends Phaser.Scene {
             frames:  this.anims.generateFrameNumbers('dying', { start: 0, end: 6, first: 0}),
             frameRate: 10
         };
+        
         this.anims.create(this.deathAnim);
+
+        this.windAnim = {
+            key: 'gust',
+            frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 4, first: 0}),
+            frameRate: 10,
+            repeat: -1,
+            repeatDelay: 1000
+        };
+
+        this.anims.create(this.windAnim);
 
         //inhale/exhale variable
         this.breatheCount = 0;
@@ -89,6 +101,10 @@ class Level extends Phaser.Scene {
         }
 
         this.cheats(); // allows num keys to travel to the different levels.
+    }
+
+    windGust(){
+        this.anims.play('gust')
     }
 
 
