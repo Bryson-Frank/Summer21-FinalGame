@@ -20,6 +20,7 @@ class Level extends Phaser.Scene {
         this.load.image('cloud1', './assets/cloud1.png');
         this.load.image('cloud2', './assets/cloud2.png');
         this.load.image('cloud3', './assets/cloud3.png');
+
         }
 
     create() {
@@ -28,12 +29,16 @@ class Level extends Phaser.Scene {
     
         this.initBckgrnd(); // load level specific background art.
 
+
         this.cloudNum = Phaser.Math.RND.integerInRange(1, 3);      // random cloud sprite.
         this.cloudHeight = Phaser.Math.RND.integerInRange(0, 100); // random height within range.
 
         this.cloud1 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud1').setOrigin(0, 0);
         this.cloud2 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud2').setOrigin(0, 0);
         this.cloud3 = this.physics.add.sprite(game.config.width, this.cloudHeight, 'cloud3').setOrigin(0, 0);
+
+        this.wind = this.physics.add.sprite(1200, 380, 'windGust');
+
 
         // Circle that contricts and expands around the button
         this.innout = this.physics.add.sprite((game.config.width/2), (game.config.height/3), 'rhythm');
@@ -61,8 +66,8 @@ class Level extends Phaser.Scene {
 
         this.windAnim = {
             key: 'gust',
-            frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 4, first: 0}),
-            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('windGust', { start: 0, end: 5, first: 0}),
+            frameRate: 4,
             repeat: -1,
             repeatDelay: 1000
         };
@@ -82,9 +87,19 @@ class Level extends Phaser.Scene {
         // create level specific variables.
 
         this.initLevel();
+
+        if (this.nextLvl != 'Level_5'){
+            this.windGust();
+        }
     }
 
     update() { // Core code of gameplay used in all levels.
+        if(this.wind.body.position.x <= 0) {
+            this.wind.setX(1200);
+        }
+        if(this.wind.anims.isPlaying) {
+            this.wind.body.velocity.x = -50;
+        }
 
         if (!this.gameIsOver) {
 
@@ -115,7 +130,7 @@ class Level extends Phaser.Scene {
     }
 
     windGust(){
-        this.anims.play('gust');
+        this.wind.anims.play('gust');
     }
 
     sendCloud() { // send a cloud onto the scene. no need to repeat because player changes scene rather fast anyway.

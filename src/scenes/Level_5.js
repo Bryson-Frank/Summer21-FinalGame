@@ -18,6 +18,7 @@ class Level_5 extends Level {
 
     initLevel() {
         musicTrack1.pause();
+        this.wind.alpha = 0;
       
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
