@@ -86,12 +86,7 @@ class Level extends Phaser.Scene {
             
             this.checkAccuracy(); // spacebar was hit, was it at the correct time?
 
-            // also lose if you don't hit spacebar in time
-            if (!this.isDecreasing &&                                    // if the cricle is growing
-                !this.wasPressed &&                                      // and we haven't hit the spacebar
-                this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button
-                this.GameOver();         
-            }
+            this.checkIfMissed();
             
             // if player reaches end of screen, then transitions to next scene
             if (this.walker.x > game.config.width) {
@@ -104,7 +99,7 @@ class Level extends Phaser.Scene {
     }
 
     windGust(){
-        this.anims.play('gust')
+        this.anims.play('gust');
     }
 
 
@@ -167,6 +162,7 @@ class Level extends Phaser.Scene {
         if ((Phaser.Input.Keyboard.JustDown(this.spaceKey)) && (!this.walker.anims.isPlaying)) {
 
             this.wasPressed = true; // we hit spacebar.
+            this.playerStarted = true;
 
             // was spacebar pressed at the correct time?     (+30 to give more leway when checking overlap)
             if (this.innout.displayWidth <= this.breathe.displayWidth + 30) { // checks size of the rhythm circle and the breathe button.
@@ -177,6 +173,17 @@ class Level extends Phaser.Scene {
 
             } else { // if it wasn't hit at the right time you lose.
                 this.GameOver();
+            }
+        }
+    }
+
+    checkIfMissed() {
+        // also lose if you don't hit spacebar in time
+        if (!this.isDecreasing &&                                    // if the cricle is growing
+            !this.wasPressed &&                                      // and we haven't hit the spacebar
+            this.innout.displayWidth > this.breathe.displayWidth) {  // by the time it gets bigger than the button       
+            if (this.playerStarted) {
+                this.GameOver();          
             }
         }
     }

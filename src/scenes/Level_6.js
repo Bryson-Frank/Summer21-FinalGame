@@ -47,4 +47,11 @@ class Level_6 extends Level {
             }
         }
     }
+
+    stopNarration() {
+        this.level6Audio.pause();
+    }
+    nextLvlMusic() {
+        this.level6Audio.pause();
+    }
 }

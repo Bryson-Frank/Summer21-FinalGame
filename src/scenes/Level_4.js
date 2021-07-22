@@ -28,4 +28,9 @@ class Level_4 extends Level {
     stopNarration() {
         this.level4Audio.pause();
     }
+
+    nextLvlMusic() {
+        console.log('stoped narration');
+        this.level4Audio.pause();
+    }
 }
