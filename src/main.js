@@ -1,5 +1,27 @@
 // Final Game
 // UCSC Summer 21
+/*/////////////////////////////////////////////////////////////////////////
+
+Collaborator names: Victor Derbier, Harsha Madala, Claudia Mcmillin, Bryson Frank
+
+Game title: Breathe (Final Game)
+
+Date completed: 7/22/21
+
+---------------------------------------------------------------------------
+Credits:
+Music
+“Spring Birds Loop with Low-Cut (New Jersey)” 
+by hargissssound at: https://freesound.org/s/345852/ 
+
+“Floating Synth Melody at 130 BPM C major loop music”
+by Lemoncreme at: https://freesound.org/s/231578/
+
+Helpful code for audio help:
+https://www.youtube.com/watch?v=SRqKOccMWbc
+
+/////////////////////////////////////////////////////////////////////////*/
+
 
 let config = {
     type: Phaser.AUTO,
