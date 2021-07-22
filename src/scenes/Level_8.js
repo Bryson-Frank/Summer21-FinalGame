@@ -45,7 +45,11 @@ class Level_8 extends Level {
             }
         }
     }
-  
+    
+    stopNarration() {
+        this.level8Audio.stop();
+    }
+
     nextLvlMusic() {
       this.level8Audio.pause();
     }

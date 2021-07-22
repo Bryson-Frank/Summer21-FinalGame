@@ -68,6 +68,10 @@ class Level_5 extends Level {
 
     }
 
+    windGust() {
+        
+    }
+
     stopNarration() {
         this.level5Audio.pause();
     }

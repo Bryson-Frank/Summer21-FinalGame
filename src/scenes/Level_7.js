@@ -11,6 +11,7 @@ class Level_7 extends Level {
     initBckgrnd() {
         this.add.sprite(0, 0, 'background7').setOrigin(0, 0);
     }
+    
     initLevel() {
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
@@ -67,12 +68,16 @@ class Level_7 extends Level {
 
             } else { // if it wasn't hit at the right time you lose.
                 console.log('lost');
-                this.scene.start('GameOverScene');
+                this.GameOver();
             }
         }
     }
 
     sendCloud() { // we don't want clouds.
+
+    }
+
+    windGust() {
 
     }
 }
