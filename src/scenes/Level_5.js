@@ -22,7 +22,7 @@ class Level_5 extends Level {
         this.walker = this.physics.add.sprite(game.config.height/4, game.config.width/3.5, 'player').setOrigin(0, 0);
         this.walker.body.velocity.x = 0;
 
-        musicTrack2 = this.sound.add('synthSounds', {volume: 0.7, loop: true});
+        musicTrack2 = this.sound.add('synthSounds', {volume: 0.6, loop: true});
         musicTrack2.play();  // implement synths
 
         this.level5Audio = this.sound.add('level5Audio', {volume: 0.6});
@@ -57,6 +57,9 @@ class Level_5 extends Level {
         }
     }
 
+    stopNarration() {
+        this.level5Audio.pause();
+    }
     nextLvlMusic() {
         musicTrack2.pause();
         musicTrack1.play();

@@ -29,12 +29,12 @@ class GameOver extends Phaser.Scene {
     }
 
     update() {
+
         if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) { // restart from the beginning.
             this.scene.start("Level_1");
             musicTrack1.play();
-            if (synthIsPlaying) {
-                musicTrack2.stop();
-                synthIsPlaying = false;
+            if (typeof musicTrack2 != 'undefined') {  // if it was defiened
+                musicTrack2.pause();                  // stop it.
             }
             
         } else if (Phaser.Input.Keyboard.JustDown(this.keyC)) { // restart where you died.
